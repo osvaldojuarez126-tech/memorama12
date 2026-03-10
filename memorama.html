@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Memorama VR</title>
+<script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+</head>
+
+<body>
+
+<a-scene vr-mode-ui="enabled: true">
+
+<a-assets>
+
+<img id="img1" src="skipper.jpg">
+<img id="img2" src="rico.jpg">
+<img id="img3" src="cabo.jpg">
+<img id="img4" src="Kowalski.jpg">
+<img id="back" src="img/atras.jpeg">
+
+<audio id="click-sound" src="https://cdn.aframe.io/360-video-boilerplate/audio/click.mp3"></audio>
+<audio id="background-music" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73456.mp3"></audio>
+
+</a-assets>
+
+<a-entity sound="src:#background-music; autoplay:true; loop:true; volume:0.4"></a-entity>
+
+<!-- CAMARA -->
+
+<a-entity position="0 0.9 6">
+
+<a-camera stereo>
+
+<a-cursor
+fuse="true"
+fuse-timeout="1000"
+material="color:#FFD700"
+raycaster="objects:.clickable">
+</a-cursor>
+
+</a-camera>
+
+</a-entity>
+
+<!-- ILUMINACION -->
+
+<a-light type="ambient" intensity="0.6" color="#ffffff"></a-light>
+
+<a-light
+type="point"
+position="0 4 0"
+intensity="1.6"
+distance="50"
+color="#ffffff">
+</a-light>
+
+<!-- PISO -->
+
+<a-plane rotation="-90 0 0" width="40" height="40" color="#0a0f1f"></a-plane>
+
+<!-- ALFOMBRA -->
+
+<a-plane
+rotation="-90 0 0"
+position="0 0.02 0"
+width="8"
+height="6"
+color="#0f5132">
+</a-plane>
+
+<!-- PAREDES -->
+
+<a-box position="0 2 -10" width="40" height="8" depth="0.3" color="#0b132b"></a-box>
+<a-box position="-10 2 0" width="0.3" height="8" depth="40" color="#0b132b"></a-box>
+<a-box position="10 2 0" width="0.3" height="8" depth="40" color="#0b132b"></a-box>
+<a-box position="0 2 10" width="40" height="8" depth="0.3" color="#0b132b"></a-box>
+
+<!-- TECHO -->
+
+<a-plane rotation="90 0 0" position="0 5 0" width="40" height="40" color="#03060f"></a-plane>
+
+<!-- LAMPARA ORIGINAL -->
+
+<a-cylinder position="0 4.7 -2" radius="0.4" height="0.3" color="#333"></a-cylinder>
+
+<!-- MESA -->
+
+<a-box position="0 0.7 -3" width="5" height="0.3" depth="2" color="#3a3a3a"></a-box>
+
+<!-- PATAS -->
+
+<a-box position="-2 0.3 -2.5" width="0.2" height="0.6" depth="0.2" color="#3a3a3a"></a-box>
+<a-box position="2 0.3 -2.5" width="0.2" height="0.6" depth="0.2" color="#3a3a3a"></a-box>
+<a-box position="-2 0.3 -3.5" width="0.2" height="0.6" depth="0.2" color="#3a3a3a"></a-box>
+<a-box position="2 0.3 -3.5" width="0.2" height="0.6" depth="0.2" color="#3a3a3a"></a-box>
+
+<!-- DECORACION FICHAS -->
+
+<a-cylinder position="3 1 -2" radius="0.3" height="0.1" color="red"></a-cylinder>
+<a-cylinder position="3.4 1 -2" radius="0.3" height="0.1" color="blue"></a-cylinder>
+<a-cylinder position="3.8 1 -2" radius="0.3" height="0.1" color="white"></a-cylinder>
+
+<!-- DADOS -->
+
+<a-box position="-4 1 -2" depth="0.4" height="0.4" width="0.4" color="white"></a-box>
+<a-box position="-3.4 1 -2.2" depth="0.4" height="0.4" width="0.4" color="white"></a-box>
+
+<!-- CARTA DECORATIVA -->
+
+<a-plane position="5 3 -9.8" width="2" height="3" color="white"></a-plane>
+
+<a-text
+value="A"
+position="4.6 3.8 -9.7"
+color="red"
+scale="3 3 3">
+</a-text>
+
+<!-- NUEVAS DECORACIONES -->
+
+<!-- TORRE DE FICHAS -->
+
+<a-cylinder position="-6 0.6 -4" radius="0.25" height="0.1" color="red"></a-cylinder>
+<a-cylinder position="-6 0.7 -4" radius="0.25" height="0.1" color="blue"></a-cylinder>
+<a-cylinder position="-6 0.8 -4" radius="0.25" height="0.1" color="white"></a-cylinder>
+<a-cylinder position="-6 0.9 -4" radius="0.25" height="0.1" color="green"></a-cylinder>
+
+<!-- MESA LATERAL -->
+
+<a-cylinder position="-6 0.6 -4" radius="0.8" height="0.1" color="#0f5132"></a-cylinder>
+<a-cylinder position="-6 0.3 -4" radius="0.1" height="0.6" color="#333"></a-cylinder>
+
+<!-- SILLA IZQUIERDA -->
+
+<a-box position="-2.8 0.6 -3" width="0.7" height="0.7" depth="0.7" color="#2b2b2b"></a-box>
+
+<!-- SILLA DERECHA -->
+
+<a-box position="2.8 0.6 -3" width="0.7" height="0.7" depth="0.7" color="#2b2b2b"></a-box>
+
+<!-- TV EN TECHO -->
+
+<a-box
+position="0 4.2 -7"
+width="6"
+height="3"
+depth="0.2"
+color="black">
+</a-box>
+
+<a-text
+value="GAME ROOM"
+align="center"
+color="#FFD700"
+scale="4 4 4"
+position="0 4.2 -6.8">
+</a-text>
+
+<!-- PUNTAJE -->
+
+<a-text id="scoreText"
+value="Puntaje: 0"
+position="-1.5 4 -2"
+color="#FFD700"
+scale="2.5 2.5 2.5">
+</a-text>
+
+<!-- TABLERO -->
+
+<a-entity id="board" position="-2.2 2.5 0"></a-entity>
+
+<!-- PANEL VICTORIA -->
+
+<a-entity id="winPanel" visible="false" position="0 2 -3">
+
+<a-plane width="4" height="2" color="#000814"></a-plane>
+
+<a-text
+id="winText"
+value="GANASTE"
+align="center"
+color="#FFD700"
+scale="3 3 3"
+position="0 0.4 0.1">
+</a-text>
+
+<a-box
+id="restart"
+class="clickable"
+position="0 -0.6 0.1"
+width="2"
+height="0.6"
+depth="0.2"
+color="#e63946">
+
+<a-text
+value="JUGAR DE NUEVO"
+align="center"
+color="white"
+position="0 0 0.2">
+</a-text>
+
+</a-box>
+
+</a-entity>
+
+</a-scene>
+
+<script>
+
+/* TU SCRIPT ORIGINAL SIN CAMBIOS */
+
+const board=document.querySelector('#board')
+const scoreText=document.querySelector('#scoreText')
+const restart=document.querySelector('#restart')
+const winPanel=document.querySelector('#winPanel')
+
+let score=0
+let flippedCards=[]
+let lockBoard=false
+
+const cardData=['img1','img1','img2','img2','img3','img3','img4','img4']
+
+function initGame(){
+
+board.innerHTML=''
+flippedCards=[]
+lockBoard=false
+score=0
+
+scoreText.setAttribute('value',"Puntaje: 0")
+winPanel.setAttribute("visible",false)
+
+const shuffled=[...cardData].sort(()=>Math.random()-0.5)
+
+shuffled.forEach((imgId,index)=>{
+
+const x=(index%4)*1.5
+const y=Math.floor(index/4)*-1.8
+
+const card=document.createElement('a-box')
+
+card.setAttribute('position',`${x} ${y} 0`)
+card.setAttribute('width','1.2')
+card.setAttribute('height','1.6')
+card.setAttribute('depth','0.1')
+card.setAttribute('src','#back')
+card.setAttribute('class','clickable')
+
+card.dataset.id=imgId
+card.dataset.flipped="false"
+
+card.addEventListener('click',function(){
+
+if(lockBoard||this.dataset.flipped==="true")return
+
+flipCard(this)
+
+})
+
+board.appendChild(card)
+
+})
+
+}
+
+function flipCard(card){
+
+card.setAttribute('animation',"property: rotation; to: 0 180 0; dur: 400")
+
+setTimeout(()=>{
+
+card.setAttribute('src','#'+card.dataset.id)
+
+},200)
+
+card.dataset.flipped="true"
+
+flippedCards.push(card)
+
+if(flippedCards.length===2){
+
+checkMatch()
+
+}
+
+}
+
+function checkMatch(){
+
+lockBoard=true
+
+const[card1,card2]=flippedCards
+
+if(card1.dataset.id===card2.dataset.id){
+
+score+=10
+scoreText.setAttribute('value',"Puntaje: "+score)
+
+flippedCards=[]
+lockBoard=false
+
+checkWin()
+
+}else{
+
+setTimeout(()=>{
+
+card1.setAttribute('animation',"property: rotation; to: 0 0 0; dur: 400")
+card2.setAttribute('animation',"property: rotation; to: 0 0 0; dur: 400")
+
+setTimeout(()=>{
+
+card1.setAttribute('src','#back')
+card2.setAttribute('src','#back')
+
+card1.dataset.flipped="false"
+card2.dataset.flipped="false"
+
+flippedCards=[]
+lockBoard=false
+
+},200)
+
+},1000)
+
+}
+
+}
+
+function checkWin(){
+
+const totalFlipped=document.querySelectorAll('[data-flipped="true"]').length
+
+if(totalFlipped===cardData.length){
+
+setTimeout(()=>{
+
+document.querySelector('#winText')
+.setAttribute('value',`¡GANASTE!\nPuntaje: ${score}`)
+
+winPanel.setAttribute("visible",true)
+
+},500)
+
+}
+
+}
+
+restart.addEventListener('click',()=>{
+
+initGame()
+
+})
+
+initGame()
+
+</script>
+
+</body>
+</html>
